@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import { useGenderGlobalStats } from '@/hooks/useGenderGlobalStats';
 import { useGenderInTopFiveCountriesData } from '@/hooks/useGenderPopulousCountriesStats';
+import { useGenderInTopFiveUsStatesData } from '@/hooks/useGenderPopulousUsStatesStats';
 
 import { BarChart } from '@/components/charts/BarChart';
 import { PieChart } from '@/components/charts/PieChart';
@@ -17,6 +18,8 @@ const HomePage = (): JSX.Element => {
   const genderGlobal = useGenderGlobalStats() as NonNullable<ChartData<'pie'>>;
   const genderDataInTopCountries =
     useGenderInTopFiveCountriesData() as NonNullable<ChartData<'bar'>>;
+  const genderDataInTopUsStates =
+    useGenderInTopFiveUsStatesData() as NonNullable<ChartData<'bar'>>;
 
   return (
     <>
@@ -40,6 +43,13 @@ const HomePage = (): JSX.Element => {
                   />
                   <BarChart
                     data={genderDataInTopCountries}
+                    title='Gender in countries'
+                    description='The population of each of the top 5 most populous countries'
+                    tags={['gender', 'countries', 'top 5']}
+                    isNew
+                  />
+                  <BarChart
+                    data={genderDataInTopUsStates}
                     title='Gender in countries'
                     description='The population of each of the top 5 most populous countries'
                     tags={['gender', 'countries', 'top 5']}

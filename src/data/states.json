@@ -1,0 +1,206 @@
+[
+  {
+    "state": "California",
+    "population": 39538223
+  },
+  {
+    "state": "Texas",
+    "population": 29145505
+  },
+  {
+    "state": "Florida",
+    "population": 21538187
+  },
+  {
+    "state": "New York",
+    "population": 20201249
+  },
+  {
+    "state": "Pennsylvania",
+    "population": 13002700
+  },
+  {
+    "state": "Illinois",
+    "population": 12659682
+  },
+  {
+    "state": "Ohio",
+    "population": 11859648
+  },
+  {
+    "state": "Georgia",
+    "population": 10711908
+  },
+  {
+    "state": "North Carolina",
+    "population": 10687708
+  },
+  {
+    "state": "Michigan",
+    "population": 10077331
+  },
+  {
+    "state": "New Jersey",
+    "population": 9294493
+  },
+  {
+    "state": "Virginia",
+    "population": 8654542
+  },
+  {
+    "state": "Washington",
+    "population": 7693612
+  },
+  {
+    "state": "Arizona",
+    "population": 7151502
+  },
+  {
+    "state": "Massachusetts",
+    "population": 7029917
+  },
+  {
+    "state": "Tennessee",
+    "population": 6944272
+  },
+  {
+    "state": "Indiana",
+    "population": 6790280
+  },
+  {
+    "state": "Missouri",
+    "population": 6169270
+  },
+  {
+    "state": "Maryland",
+    "population": 6118845
+  },
+  {
+    "state": "Wisconsin",
+    "population": 5897473
+  },
+  {
+    "state": "Colorado",
+    "population": 5893634
+  },
+  {
+    "state": "Minnesota",
+    "population": 5706494
+  },
+  {
+    "state": "South Carolina",
+    "population": 5124712
+  },
+  {
+    "state": "Alabama",
+    "population": 5024279
+  },
+  {
+    "state": "Louisiana",
+    "population": 4648794
+  },
+  {
+    "state": "Kentucky",
+    "population": 4499692
+  },
+  {
+    "state": "Oregon",
+    "population": 4241500
+  },
+  {
+    "state": "Oklahoma",
+    "population": 3953824
+  },
+  {
+    "state": "Connecticut",
+    "population": 3594478
+  },
+  {
+    "state": "Utah",
+    "population": 3366704
+  },
+  {
+    "state": "Iowa",
+    "population": 3179849
+  },
+  {
+    "state": "Nevada",
+    "population": 3199873
+  },
+  {
+    "state": "Arkansas",
+    "population": 3038999
+  },
+  {
+    "state": "Mississippi",
+    "population": 2961279
+  },
+  {
+    "state": "Kansas",
+    "population": 2937880
+  },
+  {
+    "state": "New Mexico",
+    "population": 2117522
+  },
+  {
+    "state": "New Mexico",
+    "population": 2117522
+  },
+  {
+    "state": "Nebraska",
+    "population": 1961504
+  },
+  {
+    "state": "Idaho",
+    "population": 1893340
+  },
+  {
+    "state": "West Virginia",
+    "population": 1778070
+  },
+  {
+    "state": "Hawaii",
+    "population": 1455271
+  },
+  {
+    "state": "New Hampshire",
+    "population": 1371246
+  },
+  {
+    "state": "Maine",
+    "population": 1370471
+  },
+  {
+    "state": "Montana",
+    "population": 1085407
+  },
+  {
+    "state": "Rhode Island",
+    "population": 1097379
+  },
+  {
+    "state": "Delaware",
+    "population": 990334
+  },
+  {
+    "state": "South Dakota",
+    "population": 887770
+  },
+  {
+    "state": "North Dakota",
+    "population": 779094
+  },
+  {
+    "state": "Alaska",
+    "population": 733391
+  },
+  {
+    "state": "Vermont",
+    "population": 623347
+  },
+  {
+    "state": "Wyoming",
+    "population": 576851
+  }
+]
