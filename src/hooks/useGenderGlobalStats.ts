@@ -1,7 +1,7 @@
 import type { ChartData } from 'chart.js';
 import { useEffect, useState } from 'react';
 
-import data from '../../data/users.json';
+import data from '@/data/users.json';
 
 export const useGenderGlobalStats = (): ChartData | null => {
   const [genderGlobal, setGenderGlobal] = useState<ChartData | null>(null);

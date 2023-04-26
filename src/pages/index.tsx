@@ -3,7 +3,9 @@ import { ChartData } from 'chart.js';
 import * as React from 'react';
 
 import { useGenderGlobalStats } from '@/hooks/useGenderGlobalStats';
+import { useGenderInTopFiveCountriesData } from '@/hooks/useGenderPopulousCountriesStats';
 
+import { BarChart } from '@/components/charts/BarChart';
 import { PieChart } from '@/components/charts/PieChart';
 import { Container } from '@/components/containers/Container';
 import { Layout } from '@/components/layout/Layout';
@@ -13,6 +15,8 @@ const HomePage = (): JSX.Element => {
   const session = useSession();
 
   const genderGlobal = useGenderGlobalStats() as NonNullable<ChartData<'pie'>>;
+  const genderDataInTopCountries =
+    useGenderInTopFiveCountriesData() as NonNullable<ChartData<'bar'>>;
 
   return (
     <>
@@ -32,6 +36,13 @@ const HomePage = (): JSX.Element => {
                     title='Gender structure'
                     description='Percentage of users that are female in the total population'
                     tags={['gender', 'global']}
+                    isNew
+                  />
+                  <BarChart
+                    data={genderDataInTopCountries}
+                    title='Gender in countries'
+                    description='The population of each of the top 5 most populous countries'
+                    tags={['gender', 'countries', 'top 5']}
                     isNew
                   />
                 </div>
