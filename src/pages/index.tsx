@@ -5,7 +5,9 @@ import * as React from 'react';
 import { useGenderGlobalStats } from '@/hooks/useGenderGlobalStats';
 import { useGenderInTopFiveCountriesData } from '@/hooks/useGenderPopulousCountriesStats';
 import { useGenderInTopFiveUsStatesData } from '@/hooks/useGenderPopulousUsStatesStats';
+import { useUserAgeStats } from '@/hooks/useUserAgeStats';
 
+import { AreaChart } from '@/components/charts/AreaChart';
 import { BarChart } from '@/components/charts/BarChart';
 import { PieChart } from '@/components/charts/PieChart';
 import { Container } from '@/components/containers/Container';
@@ -20,6 +22,7 @@ const HomePage = (): JSX.Element => {
     useGenderInTopFiveCountriesData() as NonNullable<ChartData<'bar'>>;
   const genderDataInTopUsStates =
     useGenderInTopFiveUsStatesData() as NonNullable<ChartData<'bar'>>;
+  const ageStructureData = useUserAgeStats() as NonNullable<ChartData<'line'>>;
 
   return (
     <>
@@ -54,6 +57,13 @@ const HomePage = (): JSX.Element => {
                     description='The population of each of the top 5 most populous countries'
                     tags={['gender', 'countries', 'top 5']}
                     isNew
+                  />
+                  <AreaChart
+                    data={ageStructureData}
+                    title='Percentage of users in age groups'
+                    description='Percentage of users in each of the following age groups: under 16, 16-25,
+26-45, 46-65, 66-85, over 85'
+                    tags={['age', 'global']}
                   />
                 </div>
               </Container>
