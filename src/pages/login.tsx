@@ -18,7 +18,6 @@ const HomePage = (): JSX.Element => {
     <div className='container mx-auto max-w-xl px-5 py-20'>
       {!session && (
         <Auth
-          providers={['github']}
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           theme='dark'
