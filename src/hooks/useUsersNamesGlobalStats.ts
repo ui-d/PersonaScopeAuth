@@ -3,12 +3,6 @@ import { useEffect, useState } from 'react';
 
 import users from '@/data/users.json';
 
-interface User {
-  name: {
-    last: string;
-  };
-}
-
 const countNamesByFirstLetter = (names: string[]): Record<string, number> => {
   const namesByFirstLetter: Record<string, number> = {};
 
@@ -28,7 +22,9 @@ export const useUsersNamesGlobalStats = (): ChartData | null => {
   const [userNamesData, setUserNamesData] = useState<ChartData | null>(null);
 
   useEffect(() => {
-    const userLastNames: string[] = users.map((user: User) => user.name.last);
+    const USERS = users as User;
+
+    const userLastNames: string[] = USERS.map((user: Person) => user.name.last);
     const namesByFirstLetter = countNamesByFirstLetter(userLastNames);
 
     const labels = 'MNOPQRSTUVWXYZ'.split('');

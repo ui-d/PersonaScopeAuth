@@ -9,8 +9,10 @@ export const useGenderInTopFiveCountriesData = (): ChartData | null => {
     useState<ChartData | null>(null);
 
   useEffect(() => {
+    const USERS = users as User;
+
     const uniqueUserCountries = [
-      ...new Set(users.map((data) => data.location.country)),
+      ...new Set(USERS.map((user: Person) => user.location.country)),
     ];
 
     const topFiveUserCountriesByPopulation: string[] = countries
@@ -21,8 +23,8 @@ export const useGenderInTopFiveCountriesData = (): ChartData | null => {
 
     const femaleUsersInTopFiveCountries = topFiveUserCountriesByPopulation.map(
       (country) => {
-        return users.filter(
-          (user) =>
+        return USERS.filter(
+          (user: Person) =>
             user.location.country === country && user.gender === 'female'
         ).length;
       }
@@ -30,8 +32,9 @@ export const useGenderInTopFiveCountriesData = (): ChartData | null => {
 
     const maleUsersInTopFiveCountries = topFiveUserCountriesByPopulation.map(
       (country) => {
-        return users.filter(
-          (user) => user.location.country === country && user.gender === 'male'
+        return USERS.filter(
+          (user: Person) =>
+            user.location.country === country && user.gender === 'male'
         ).length;
       }
     );

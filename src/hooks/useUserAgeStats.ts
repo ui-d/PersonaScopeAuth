@@ -13,7 +13,8 @@ export const useUserAgeStats = (): ChartData | null => {
   const [ageData, setAgeData] = useState<ChartData | null>(null);
 
   useEffect(() => {
-    const usersAge = users.map((user) => user.dob.age);
+    const USERS = users as User;
+    const usersAge = USERS.map((user: Person) => user.dob.age);
 
     const ageRanges = [
       { label: 'under 16', min: 0, max: 15 },

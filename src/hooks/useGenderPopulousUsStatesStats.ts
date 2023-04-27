@@ -9,12 +9,15 @@ export const useGenderInTopFiveUsStatesData = (): ChartData | null => {
     useState<ChartData | null>(null);
 
   useEffect(() => {
-    const usUsers = users.filter(
-      (user) => user.location.country === 'United States' && user.location.state
+    const USERS = users as User;
+
+    const usUsers = USERS.filter(
+      (user: Person) =>
+        user.location.country === 'United States' && user.location.state
     );
 
     const uniqueUserStates = [
-      ...new Set(usUsers.map((data) => data.location.state)),
+      ...new Set(usUsers.map((data: Person) => data.location.state)),
     ];
 
     const topFiveUserStatesByPopulation: string[] = states
@@ -26,7 +29,8 @@ export const useGenderInTopFiveUsStatesData = (): ChartData | null => {
     const femaleUsersInTopFiveStates = topFiveUserStatesByPopulation.map(
       (state) => {
         return usUsers.filter(
-          (user) => user.location.state === state && user.gender === 'female'
+          (user: Person) =>
+            user.location.state === state && user.gender === 'female'
         ).length;
       }
     );
@@ -34,7 +38,8 @@ export const useGenderInTopFiveUsStatesData = (): ChartData | null => {
     const maleUsersInTopFiveStates = topFiveUserStatesByPopulation.map(
       (state) => {
         return usUsers.filter(
-          (user) => user.location.state === state && user.gender === 'male'
+          (user: Person) =>
+            user.location.state === state && user.gender === 'male'
         ).length;
       }
     );

@@ -7,11 +7,16 @@ import { useGenderInTopFiveCountriesData } from '@/hooks/useGenderPopulousCountr
 import { useGenderInTopFiveUsStatesData } from '@/hooks/useGenderPopulousUsStatesStats';
 import { useUserAgeStats } from '@/hooks/useUserAgeStats';
 import { useUsersNamesGlobalStats } from '@/hooks/useUsersNamesGlobalStats';
+import {
+  StackedBarChartOptions,
+  useUsersNamesInPopulousUsStatesStats,
+} from '@/hooks/useUsersNamesInPopulousUsStatesStats';
 
 import { AreaChart } from '@/components/charts/AreaChart';
 import { BarChart } from '@/components/charts/BarChart';
 import { DoughnutChart } from '@/components/charts/DoughnutChart';
 import { PieChart } from '@/components/charts/PieChart';
+import { StackedBarChart } from '@/components/charts/StackedBarChart';
 import { Container } from '@/components/containers/Container';
 import { Layout } from '@/components/layout/Layout';
 import { Seo } from '@/components/Seo';
@@ -28,6 +33,8 @@ const HomePage = (): JSX.Element => {
   const usersNamesGlobalStats = useUsersNamesGlobalStats() as NonNullable<
     ChartData<'doughnut'>
   >;
+  const usersNamesInPopulousUsStatesStats =
+    useUsersNamesInPopulousUsStatesStats() as NonNullable<ChartData<'bar'>>;
 
   return (
     <>
@@ -74,6 +81,13 @@ const HomePage = (): JSX.Element => {
                     data={usersNamesGlobalStats}
                     title='Names starting with N-Z'
                     description='Percentage of global users whose last names start with the letters N-Z'
+                    tags={['names', 'global']}
+                  />
+                  <StackedBarChart
+                    data={usersNamesInPopulousUsStatesStats}
+                    options={StackedBarChartOptions}
+                    title='Names starting with N-Z in top states'
+                    description='Percentage of American users from most populous states, whose last names start with the letters N-Z'
                     tags={['names', 'global']}
                   />
                 </div>

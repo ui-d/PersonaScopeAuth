@@ -1,15 +1,17 @@
 import type { ChartData } from 'chart.js';
 import { useEffect, useState } from 'react';
 
-import data from '@/data/users.json';
+import users from '@/data/users.json';
 
 export const useGenderGlobalStats = (): ChartData | null => {
   const [genderGlobal, setGenderGlobal] = useState<ChartData | null>(null);
 
   useEffect(() => {
-    const totalNumberOfUsers = data.length;
+    const USERS = users as User;
 
-    const femaleUsersNumber = data.filter((user) => {
+    const totalNumberOfUsers = USERS.length;
+
+    const femaleUsersNumber = USERS.filter((user: Person) => {
       return user.gender === 'female';
     }).length;
 
