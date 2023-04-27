@@ -28,6 +28,7 @@ interface propType {
   description: string;
   tags?: string[];
   isNew?: boolean;
+  isFullWidth?: boolean;
 }
 
 export function StackedBarChart({
@@ -37,9 +38,14 @@ export function StackedBarChart({
   description,
   tags,
   isNew,
+  isFullWidth,
 }: propType) {
   return (
-    <div className='card bg-base-100 col-span-8 p-5 shadow-xl'>
+    <div
+      className={`${
+        isFullWidth ? 'col-span-12' : 'col-span-8'
+      } card bg-base-100 p-5 shadow-xl`}
+    >
       <div>
         <Bar options={options} data={data} />
       </div>

@@ -90,6 +90,14 @@ const HomePage = (): JSX.Element => {
                     description='Percentage of American users from most populous states, whose last names start with the letters N-Z'
                     tags={['names', 'global']}
                   />
+                  <StackedBarChart
+                    data={usersNamesInPopulousUsStatesStats}
+                    options={StackedBarChartOptions}
+                    title='Names starting with N-Z in top countries'
+                    description='Percentage of users from most populous countries, whose last names start with the letters N-Z'
+                    tags={['names', 'global']}
+                    isFullWidth
+                  />
                 </div>
               </Container>
             </>
