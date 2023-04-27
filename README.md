@@ -2,7 +2,7 @@
 
 Bloomtech data analysis tool
 
-[![Deployed on Render](https://img.shields.io/badge/Deployed%20on-Render-blue)](https://remarkable-kleicha-e47660.netlify.app/)
+[![Deployed on Render](https://img.shields.io/badge/Deployed%20on-Render-blue)](https://personascopeauth.onrender.com/login)
 
 ## Features
 
