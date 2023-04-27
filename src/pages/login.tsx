@@ -7,7 +7,6 @@ const HomePage = (): JSX.Element => {
   const session = useSession();
   const supabase = useSupabaseClient();
 
-  // if user logged in, redirect to dashboard
   React.useEffect(() => {
     if (session) {
       window.location.href = '/';

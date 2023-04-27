@@ -6,8 +6,6 @@ export function Navbar(): JSX.Element {
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
-
-    //redirect to login page
     window.location.href = '/login';
   };
 
