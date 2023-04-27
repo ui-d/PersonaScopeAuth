@@ -24,11 +24,11 @@ git clone https://github.com/yourusername/ts-nextjs-tailwind-starter.git
 2. Install dependencies
 
    ```bash
-   cd PersonaScope
+   cd PersonaScopeAuth
    npm install
    ```
 
-3. Create a `.env.local` file in the root directory and add the following environment variables:
+3. Create a `.env` file in the root directory and add the following environment variables:
 
    ```bash
    NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
