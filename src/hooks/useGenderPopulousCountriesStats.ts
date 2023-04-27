@@ -2,17 +2,16 @@ import type { ChartData } from 'chart.js';
 import { useEffect, useState } from 'react';
 
 import countries from '@/data/countries.json';
-import users from '@/data/users.json';
 
-export const useGenderInTopFiveCountriesData = (): ChartData | null => {
+export const useGenderInTopFiveCountriesData = (
+  users: User
+): ChartData | null => {
   const [genderDataInTopCountries, setGenderDataInTopCountries] =
     useState<ChartData | null>(null);
 
   useEffect(() => {
-    const USERS = users as User;
-
     const uniqueUserCountries = [
-      ...new Set(USERS.map((user: Person) => user.location.country)),
+      ...new Set(users.map((user: Person) => user.location.country)),
     ];
 
     const topFiveUserCountriesByPopulation: string[] = countries
@@ -23,7 +22,7 @@ export const useGenderInTopFiveCountriesData = (): ChartData | null => {
 
     const femaleUsersInTopFiveCountries = topFiveUserCountriesByPopulation.map(
       (country) => {
-        return USERS.filter(
+        return users.filter(
           (user: Person) =>
             user.location.country === country && user.gender === 'female'
         ).length;
@@ -32,7 +31,7 @@ export const useGenderInTopFiveCountriesData = (): ChartData | null => {
 
     const maleUsersInTopFiveCountries = topFiveUserCountriesByPopulation.map(
       (country) => {
-        return USERS.filter(
+        return users.filter(
           (user: Person) =>
             user.location.country === country && user.gender === 'male'
         ).length;
@@ -70,7 +69,7 @@ export const useGenderInTopFiveCountriesData = (): ChartData | null => {
     };
 
     setGenderDataInTopCountries(genderInTopFiveCountriesData);
-  }, []);
+  }, [users]);
 
   return genderDataInTopCountries;
 };

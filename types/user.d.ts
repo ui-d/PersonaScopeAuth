@@ -56,3 +56,13 @@ type Person = {
 };
 
 type User = Person[];
+
+type ApiResult = {
+  results: User;
+  info: {
+    seed: string;
+    results: number;
+    page: number;
+    version: string;
+  };
+};

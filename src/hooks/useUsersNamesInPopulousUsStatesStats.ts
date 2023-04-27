@@ -2,22 +2,22 @@ import type { ChartData } from 'chart.js';
 import { useEffect, useMemo, useState } from 'react';
 
 import states from '@/data/states.json';
-import users from '@/data/users.json';
 
 import { countNamesByFirstLetter, getRandomColor } from '@/utils/helpers';
 
 const LABELS = ['M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W'];
 
-export const useUsersNamesInPopulousUsStatesStats = (): ChartData | null => {
-  const USERS = users as User;
+export const useUsersNamesInPopulousUsStatesStats = (
+  users: User
+): ChartData | null => {
   const [userNamesData, setUserNamesData] = useState<ChartData | null>(null);
 
   const usUsers = useMemo(() => {
-    return USERS.filter(
+    return users.filter(
       (user: Person) =>
         user.location.country === 'United States' && user.location.state
     );
-  }, [USERS]);
+  }, [users]);
 
   useEffect(() => {
     const usUsersNumber = usUsers.length;

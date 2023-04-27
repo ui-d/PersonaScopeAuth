@@ -2,23 +2,22 @@ import type { ChartData } from 'chart.js';
 import { useEffect, useMemo, useState } from 'react';
 
 import countries from '@/data/countries.json';
-import users from '@/data/users.json';
 
 import { countNamesByFirstLetter, getRandomColor } from '@/utils/helpers';
 
 const LABELS = ['M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W'];
 
-export const useUsersNamesInPopulousCountries = (): ChartData | null => {
-  const USERS = users as User;
-
-  const usersNumber = USERS.length;
+export const useUsersNamesInPopulousCountries = (
+  users: User
+): ChartData | null => {
+  const usersNumber = users.length;
 
   const [userNamesInTopCountries, setUserNamesInTopCountries] =
     useState<ChartData | null>(null);
 
   const uniqueUserCountries = useMemo(
-    () => [...new Set(USERS.map((user: Person) => user.location.country))],
-    [USERS]
+    () => [...new Set(users.map((user: Person) => user.location.country))],
+    [users]
   );
 
   useEffect(() => {
@@ -31,9 +30,9 @@ export const useUsersNamesInPopulousCountries = (): ChartData | null => {
     const namesByFirstLetterInEachCountry =
       topFiveUserCountriesByPopulation.reduce((acc, country) => {
         acc[country] = countNamesByFirstLetter(
-          USERS.filter((user: Person) => user.location.country === country).map(
-            (user: Person) => user.name.last
-          )
+          users
+            .filter((user: Person) => user.location.country === country)
+            .map((user: Person) => user.name.last)
         );
         return acc;
       }, {} as Record<string, Record<string, number>>);
@@ -57,7 +56,7 @@ export const useUsersNamesInPopulousCountries = (): ChartData | null => {
     };
 
     setUserNamesInTopCountries(userNamesData);
-  }, [USERS, usersNumber, uniqueUserCountries]);
+  }, [users, usersNumber, uniqueUserCountries]);
 
   return userNamesInTopCountries;
 };

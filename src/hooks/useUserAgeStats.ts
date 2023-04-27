@@ -1,21 +1,18 @@
 import type { ChartData } from 'chart.js';
 import { useEffect, useState } from 'react';
 
-import users from '@/data/users.json';
-
 const countUsersInAgeRange = (
   usersAge: number[],
   minAge: number,
   maxAge: number
 ): number => usersAge.filter((age) => age >= minAge && age <= maxAge).length;
 
-export const useUserAgeStats = (): ChartData | null => {
+export const useUserAgeStats = (users: User): ChartData | null => {
   const [ageData, setAgeData] = useState<ChartData | null>(null);
 
   useEffect(() => {
-    const USERS = users as User;
-    const usersNumber = USERS.length;
-    const usersAge = USERS.map((user: Person) => user.dob.age);
+    const usersNumber = users.length;
+    const usersAge = users.map((user: Person) => user.dob.age);
 
     const ageRanges = [
       { label: 'under 16', min: 0, max: 15 },
@@ -45,7 +42,7 @@ export const useUserAgeStats = (): ChartData | null => {
     };
 
     setAgeData(ageStructureData);
-  }, []);
+  }, [users]);
 
   return ageData;
 };

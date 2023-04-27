@@ -1,17 +1,13 @@
 import type { ChartData } from 'chart.js';
 import { useEffect, useState } from 'react';
 
-import users from '@/data/users.json';
-
-export const useGenderGlobalStats = (): ChartData | null => {
+export const useGenderGlobalStats = (users: User): ChartData | null => {
   const [genderGlobal, setGenderGlobal] = useState<ChartData | null>(null);
 
   useEffect(() => {
-    const USERS = users as User;
+    const totalNumberOfUsers = users.length;
 
-    const totalNumberOfUsers = USERS.length;
-
-    const femaleUsersNumber = USERS.filter((user: Person) => {
+    const femaleUsersNumber = users.filter((user: Person) => {
       return user.gender === 'female';
     }).length;
 
@@ -35,7 +31,7 @@ export const useGenderGlobalStats = (): ChartData | null => {
     };
 
     setGenderGlobal(genderData);
-  }, []);
+  }, [users]);
 
   return genderGlobal;
 };

@@ -1,4 +1,5 @@
 import { useSession } from '@supabase/auth-helpers-react';
+import axios from 'axios';
 import { ChartData } from 'chart.js';
 import * as React from 'react';
 
@@ -21,21 +22,28 @@ import { Seo } from '@/components/Seo';
 
 import { StackedBarChartOptions } from '@/utils/chartConfigs';
 
-const HomePage = (): JSX.Element => {
+interface HomePageProps {
+  users: User;
+}
+const HomePage = ({ users }: HomePageProps): JSX.Element => {
   const session = useSession();
 
-  const genderGlobal = useGenderGlobalStats() as ChartData<'pie'>;
-  const genderDataInTopCountries =
-    useGenderInTopFiveCountriesData() as ChartData<'bar'>;
-  const genderDataInTopUsStates =
-    useGenderInTopFiveUsStatesData() as ChartData<'bar'>;
-  const ageStructureData = useUserAgeStats() as ChartData<'line'>;
-  const usersNamesGlobalStats =
-    useUsersNamesGlobalStats() as ChartData<'doughnut'>;
+  const genderGlobal = useGenderGlobalStats(users) as ChartData<'pie'>;
+  const genderDataInTopCountries = useGenderInTopFiveCountriesData(
+    users
+  ) as ChartData<'bar'>;
+  const genderDataInTopUsStates = useGenderInTopFiveUsStatesData(
+    users
+  ) as ChartData<'bar'>;
+  const ageStructureData = useUserAgeStats(users) as ChartData<'line'>;
+  const usersNamesGlobalStats = useUsersNamesGlobalStats(
+    users
+  ) as ChartData<'doughnut'>;
   const usersNamesInPopulousUsStatesStats =
-    useUsersNamesInPopulousUsStatesStats() as ChartData<'bar'>;
-  const usersNamesInPopulousCountries =
-    useUsersNamesInPopulousCountries() as ChartData<'bar'>;
+    useUsersNamesInPopulousUsStatesStats(users) as ChartData<'bar'>;
+  const usersNamesInPopulousCountries = useUsersNamesInPopulousCountries(
+    users
+  ) as ChartData<'bar'>;
 
   return (
     <>
@@ -110,3 +118,21 @@ const HomePage = (): JSX.Element => {
 };
 
 export default HomePage;
+
+export async function getStaticProps() {
+  let users = [];
+
+  try {
+    const response = await axios.get('https://randomuser.me/api/?results=3000');
+    users = response.data.results;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error fetching users:', error);
+  }
+
+  return {
+    props: {
+      users,
+    },
+  };
+}

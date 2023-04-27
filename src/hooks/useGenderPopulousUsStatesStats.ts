@@ -2,16 +2,15 @@ import type { ChartData } from 'chart.js';
 import { useEffect, useState } from 'react';
 
 import states from '@/data/states.json';
-import users from '@/data/users.json';
 
-export const useGenderInTopFiveUsStatesData = (): ChartData | null => {
+export const useGenderInTopFiveUsStatesData = (
+  users: User
+): ChartData | null => {
   const [genderDataInTopFiveStates, setGenderDataInTopFiveStates] =
     useState<ChartData | null>(null);
 
   useEffect(() => {
-    const USERS = users as User;
-
-    const usUsers = USERS.filter(
+    const usUsers = users.filter(
       (user: Person) =>
         user.location.country === 'United States' && user.location.state
     );
@@ -61,7 +60,7 @@ export const useGenderInTopFiveUsStatesData = (): ChartData | null => {
     };
 
     setGenderDataInTopFiveStates(genderInTopFiveUsStatesData);
-  }, []);
+  }, [users]);
 
   return genderDataInTopFiveStates;
 };
