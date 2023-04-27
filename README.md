@@ -43,6 +43,22 @@ git clone https://github.com/yourusername/ts-nextjs-tailwind-starter.git
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser to view the app
 
+## Endpoint Usage
+
+To use the endpoint, make a GET request to /api/data with the format query parameter set to either json or csv to receive the data in the respective format.
+
+For example:
+
+```bash
+GET /api/data?format=json
+```
+
+or
+
+```bash
+GET /api/data?format=csv
+```
+
 ## Deployment
 
 The app is currently deployed on [Render](https://render.com/). Visit the live demo here: [https://personascopeauth.onrender.com/login](https://personascopeauth.onrender.com/login)
