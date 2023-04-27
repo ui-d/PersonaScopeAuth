@@ -14,6 +14,7 @@ export const useUserAgeStats = (): ChartData | null => {
 
   useEffect(() => {
     const USERS = users as User;
+    const usersNumber = USERS.length;
     const usersAge = USERS.map((user: Person) => user.dob.age);
 
     const ageRanges = [
@@ -25,8 +26,9 @@ export const useUserAgeStats = (): ChartData | null => {
       { label: 'over 85', min: 86, max: Infinity },
     ];
 
-    const usersInAgeGroups = ageRanges.map(({ min, max }) =>
-      countUsersInAgeRange(usersAge, min, max)
+    const usersInAgeGroups = ageRanges.map(
+      ({ min, max }) =>
+        (countUsersInAgeRange(usersAge, min, max) / usersNumber) * 100
     );
 
     const ageStructureData = {
@@ -34,7 +36,7 @@ export const useUserAgeStats = (): ChartData | null => {
       datasets: [
         {
           fill: true,
-          label: 'Users in age group',
+          label: '% of users',
           data: usersInAgeGroups,
           borderColor: 'rgb(53, 162, 235)',
           backgroundColor: 'rgba(53, 162, 235, 0.5)',

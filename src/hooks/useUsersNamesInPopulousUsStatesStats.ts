@@ -4,38 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import states from '@/data/states.json';
 import users from '@/data/users.json';
 
-export const StackedBarChartOptions = {
-  plugins: {
-    title: {
-      display: true,
-      text: 'Bar Chart - Stacked',
-    },
-  },
-  responsive: true,
-  scales: {
-    x: {
-      stacked: true,
-    },
-    y: {
-      stacked: true,
-    },
-  },
-};
-
-const countNamesByFirstLetter = (names: string[]): Record<string, number> => {
-  const namesByFirstLetter: Record<string, number> = {};
-
-  for (const name of names) {
-    const firstLetter = name[0].toUpperCase();
-
-    if (firstLetter >= 'M' && firstLetter <= 'Z') {
-      namesByFirstLetter[firstLetter] =
-        (namesByFirstLetter[firstLetter] || 0) + 1;
-    }
-  }
-
-  return namesByFirstLetter;
-};
+import { countNamesByFirstLetter, getRandomColor } from '@/utils/helpers';
 
 const LABELS = ['M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W'];
 
@@ -84,9 +53,7 @@ export const useUsersNamesInPopulousUsStatesStats = (): ChartData | null => {
               usUsersNumber || 0
           );
         }),
-        backgroundColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(
-          Math.random() * 255
-        )}, ${Math.floor(Math.random() * 255)}, 0.5)`,
+        backgroundColor: getRandomColor(),
       };
     });
 

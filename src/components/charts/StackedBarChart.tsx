@@ -43,7 +43,7 @@ export function StackedBarChart({
   return (
     <div
       className={`${
-        isFullWidth ? 'col-span-12' : 'col-span-8'
+        isFullWidth ? 'col-span-12' : 'col-span-12 xl:col-span-8'
       } card bg-base-100 p-5 shadow-xl`}
     >
       <div>

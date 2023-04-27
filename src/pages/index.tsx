@@ -8,10 +8,7 @@ import { useGenderInTopFiveUsStatesData } from '@/hooks/useGenderPopulousUsState
 import { useUserAgeStats } from '@/hooks/useUserAgeStats';
 import { useUsersNamesGlobalStats } from '@/hooks/useUsersNamesGlobalStats';
 import { useUsersNamesInPopulousCountries } from '@/hooks/useUsersNamesInPopulousCountries';
-import {
-  StackedBarChartOptions,
-  useUsersNamesInPopulousUsStatesStats,
-} from '@/hooks/useUsersNamesInPopulousUsStatesStats';
+import { useUsersNamesInPopulousUsStatesStats } from '@/hooks/useUsersNamesInPopulousUsStatesStats';
 
 import { AreaChart } from '@/components/charts/AreaChart';
 import { BarChart } from '@/components/charts/BarChart';
@@ -22,23 +19,23 @@ import { Container } from '@/components/containers/Container';
 import { Layout } from '@/components/layout/Layout';
 import { Seo } from '@/components/Seo';
 
+import { StackedBarChartOptions } from '@/utils/chartConfigs';
+
 const HomePage = (): JSX.Element => {
   const session = useSession();
 
-  const genderGlobal = useGenderGlobalStats() as NonNullable<ChartData<'pie'>>;
+  const genderGlobal = useGenderGlobalStats() as ChartData<'pie'>;
   const genderDataInTopCountries =
-    useGenderInTopFiveCountriesData() as NonNullable<ChartData<'bar'>>;
+    useGenderInTopFiveCountriesData() as ChartData<'bar'>;
   const genderDataInTopUsStates =
-    useGenderInTopFiveUsStatesData() as NonNullable<ChartData<'bar'>>;
-  const ageStructureData = useUserAgeStats() as NonNullable<ChartData<'line'>>;
-  const usersNamesGlobalStats = useUsersNamesGlobalStats() as NonNullable<
-    ChartData<'doughnut'>
-  >;
+    useGenderInTopFiveUsStatesData() as ChartData<'bar'>;
+  const ageStructureData = useUserAgeStats() as ChartData<'line'>;
+  const usersNamesGlobalStats =
+    useUsersNamesGlobalStats() as ChartData<'doughnut'>;
   const usersNamesInPopulousUsStatesStats =
-    useUsersNamesInPopulousUsStatesStats() as NonNullable<ChartData<'bar'>>;
-
+    useUsersNamesInPopulousUsStatesStats() as ChartData<'bar'>;
   const usersNamesInPopulousCountries =
-    useUsersNamesInPopulousCountries() as NonNullable<ChartData<'bar'>>;
+    useUsersNamesInPopulousCountries() as ChartData<'bar'>;
 
   return (
     <>
@@ -52,32 +49,32 @@ const HomePage = (): JSX.Element => {
           <main className='mb-52'>
             <>
               <Container>
-                <div className='flex w-full grid-flow-row grid-cols-12  gap-4 overflow-y-hidden overflow-x-scroll px-10 pb-10 pt-1 xl:grid xl:overflow-x-auto xl:px-4'>
+                <div className='flex grid w-full grid-flow-row grid-cols-12 gap-4 overflow-y-hidden overflow-x-scroll px-10 pb-10 pt-1 xl:overflow-x-auto xl:px-4'>
                   <PieChart
                     data={genderGlobal}
-                    title='Gender structure'
+                    title='Global gender structure'
                     description='Percentage of users that are female in the total population'
                     tags={['gender', 'global']}
                     isNew
                   />
                   <BarChart
                     data={genderDataInTopCountries}
-                    title='Gender in countries'
-                    description='The population of each of the top 5 most populous countries'
+                    title='Gender in most populous countries'
+                    description='Percentage of each gender in the top 5 most populous countries'
                     tags={['gender', 'countries', 'top 5']}
                     isNew
                   />
                   <BarChart
                     data={genderDataInTopUsStates}
-                    title='Gender in countries'
-                    description='The population of each of the top 5 most populous countries'
-                    tags={['gender', 'countries', 'top 5']}
+                    title='Gender in most populous states'
+                    description='Percentage of each gender in the top 5 most populous states'
+                    tags={['gender', 'states', 'top 5']}
                     isNew
                   />
                   <AreaChart
                     data={ageStructureData}
                     title='Percentage of users in age groups'
-                    description='Percentage of users in each of the following age groups: under 16, 16-25,
+                    description='Percentage of global users in each of the following age groups: under 16, 16-25,
 26-45, 46-65, 66-85, over 85'
                     tags={['age', 'global']}
                   />
@@ -90,16 +87,16 @@ const HomePage = (): JSX.Element => {
                   <StackedBarChart
                     data={usersNamesInPopulousUsStatesStats}
                     options={StackedBarChartOptions}
-                    title='Names starting with N-Z in top states'
+                    title='Names starting with N-Z in most populous states'
                     description='Percentage of American users from most populous states, whose last names start with the letters N-Z'
-                    tags={['names', 'global']}
+                    tags={['names', 'global', 'top 5', 'states']}
                   />
                   <StackedBarChart
                     data={usersNamesInPopulousCountries}
                     options={StackedBarChartOptions}
-                    title='Names starting with N-Z in top countries'
+                    title='Names starting with N-Z in top populous countries'
                     description='Percentage of users from most populous countries, whose last names start with the letters N-Z'
-                    tags={['names', 'global']}
+                    tags={['names', 'global', 'top 5', 'countries']}
                     isFullWidth
                   />
                 </div>

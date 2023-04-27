@@ -21,7 +21,7 @@ export function DoughnutChart({
   isNew,
 }: DoughnutChartProps) {
   return (
-    <div className='card bg-base-100 col-span-4 p-5 shadow-xl'>
+    <div className='card bg-base-100 col-span-12 p-5 shadow-xl xl:col-span-4'>
       <div>
         <Doughnut data={data} />
       </div>

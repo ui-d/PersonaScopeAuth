@@ -3,20 +3,7 @@ import { useEffect, useState } from 'react';
 
 import users from '@/data/users.json';
 
-const countNamesByFirstLetter = (names: string[]): Record<string, number> => {
-  const namesByFirstLetter: Record<string, number> = {};
-
-  for (const name of names) {
-    const firstLetter = name[0].toUpperCase();
-
-    if (firstLetter >= 'M' && firstLetter <= 'Z') {
-      namesByFirstLetter[firstLetter] =
-        (namesByFirstLetter[firstLetter] || 0) + 1;
-    }
-  }
-
-  return namesByFirstLetter;
-};
+import { countNamesByFirstLetter } from '@/utils/helpers';
 
 export const useUsersNamesGlobalStats = (): ChartData | null => {
   const [userNamesData, setUserNamesData] = useState<ChartData | null>(null);
@@ -64,7 +51,7 @@ export const useUsersNamesGlobalStats = (): ChartData | null => {
       labels: [...labels, 'Rest'],
       datasets: [
         {
-          label: 'number of names',
+          label: '% of names',
           data: [...percentageOfNamesArray, restOfNames],
           backgroundColor: [...backgroundColors, 'rgba(255, 19, 64, 0.2)'],
           borderColor: [...borderColors, 'rgb(255, 19, 64, 1)'],

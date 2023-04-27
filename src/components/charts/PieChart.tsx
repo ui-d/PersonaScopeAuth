@@ -13,7 +13,7 @@ interface propType {
 }
 export function PieChart({ data, title, description, tags, isNew }: propType) {
   return (
-    <div className='card bg-base-100 col-span-4 w-96 p-5 shadow-xl'>
+    <div className='card bg-base-100 col-span-12 p-5 shadow-xl xl:col-span-4'>
       <div>
         <Pie data={data} />
       </div>

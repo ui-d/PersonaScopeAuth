@@ -48,12 +48,12 @@ export const useGenderInTopFiveUsStatesData = (): ChartData | null => {
       labels: topFiveUserStatesByPopulation,
       datasets: [
         {
-          label: 'Female',
+          label: '% of female',
           data: femaleUsersInTopFiveStates,
           backgroundColor: 'rgba(255, 99, 132, 0.5)',
         },
         {
-          label: 'Male',
+          label: '% of male',
           data: maleUsersInTopFiveStates,
           backgroundColor: 'rgba(53, 162, 235, 0.5)',
         },
