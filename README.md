@@ -45,7 +45,7 @@ git clone https://github.com/yourusername/ts-nextjs-tailwind-starter.git
 
 ## Deployment
 
-The app is currently deployed on [Render](https://render.com/). Visit the live demo here: [https://remarkable-kleicha-e47660.netlify.app/](https://remarkable-kleicha-e47660.netlify.app/)
+The app is currently deployed on [Render](https://render.com/). Visit the live demo here: [https://personascopeauth.onrender.com/login](https://personascopeauth.onrender.com/login)
 
 ## Optimization Recommendations
 
