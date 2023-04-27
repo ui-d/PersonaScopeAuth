@@ -22,8 +22,6 @@ export const StackedBarChartOptions = {
   },
 };
 
-const LABELS = ['M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W'];
-
 const countNamesByFirstLetter = (names: string[]): Record<string, number> => {
   const namesByFirstLetter: Record<string, number> = {};
 
@@ -38,6 +36,8 @@ const countNamesByFirstLetter = (names: string[]): Record<string, number> => {
 
   return namesByFirstLetter;
 };
+
+const LABELS = ['M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W'];
 
 export const useUsersNamesInPopulousUsStatesStats = (): ChartData | null => {
   const USERS = users as User;

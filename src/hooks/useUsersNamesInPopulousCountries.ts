@@ -1,28 +1,8 @@
 import type { ChartData } from 'chart.js';
 import { useEffect, useMemo, useState } from 'react';
 
-import states from '@/data/states.json';
+import countries from '@/data/countries.json';
 import users from '@/data/users.json';
-
-export const StackedBarChartOptions = {
-  plugins: {
-    title: {
-      display: true,
-      text: 'Bar Chart - Stacked',
-    },
-  },
-  responsive: true,
-  scales: {
-    x: {
-      stacked: true,
-    },
-    y: {
-      stacked: true,
-    },
-  },
-};
-
-const LABELS = ['M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W'];
 
 const countNamesByFirstLetter = (names: string[]): Record<string, number> => {
   const namesByFirstLetter: Record<string, number> = {};
@@ -39,64 +19,64 @@ const countNamesByFirstLetter = (names: string[]): Record<string, number> => {
   return namesByFirstLetter;
 };
 
-export const useUsersNamesInPopulousUsStatesStats = (): ChartData | null => {
-  const USERS = users as User;
-  const [userNamesData, setUserNamesData] = useState<ChartData | null>(null);
+const getRandomColor = (): string => {
+  return `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(
+    Math.random() * 255
+  )}, ${Math.floor(Math.random() * 255)}, 0.5)`;
+};
 
-  const usUsers = useMemo(() => {
-    return USERS.filter(
-      (user: Person) =>
-        user.location.country === 'United States' && user.location.state
-    );
-  }, [USERS]);
+const LABELS = ['M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W'];
+
+export const useUsersNamesInPopulousCountries = (): ChartData | null => {
+  const USERS = users as User;
+
+  const usersNumber = USERS.length;
+
+  const [userNamesInTopCountries, setUserNamesInTopCountries] =
+    useState<ChartData | null>(null);
+
+  const uniqueUserCountries = useMemo(
+    () => [...new Set(USERS.map((user: Person) => user.location.country))],
+    [USERS]
+  );
 
   useEffect(() => {
-    const usUsersNumber = usUsers.length;
-
-    const uniqueUserStates = [
-      ...new Set(usUsers.map((data: Person) => data.location.state)),
-    ];
-
-    const topFiveUserStatesByPopulation: string[] = states
-      .filter((state) => uniqueUserStates.includes(state.state))
+    const topFiveUserCountriesByPopulation: string[] = countries
+      .filter((country) => uniqueUserCountries.includes(country.country))
       .sort((a, b) => b.population - a.population)
       .slice(0, 5)
-      .map((state) => state.state);
+      .map((country) => country.country);
 
-    const namesByFirstLetterInEachState = topFiveUserStatesByPopulation.reduce(
-      (acc, state) => {
-        acc[state] = countNamesByFirstLetter(
-          usUsers
-            .filter((user: Person) => user.location.state === state)
-            .map((user: Person) => user.name.last)
+    const namesByFirstLetterInEachCountry =
+      topFiveUserCountriesByPopulation.reduce((acc, country) => {
+        acc[country] = countNamesByFirstLetter(
+          USERS.filter((user: Person) => user.location.country === country).map(
+            (user: Person) => user.name.last
+          )
         );
         return acc;
-      },
-      {} as Record<string, Record<string, number>>
-    );
+      }, {} as Record<string, Record<string, number>>);
 
     const datasets = LABELS.map((label) => {
       return {
         label,
-        data: topFiveUserStatesByPopulation.map((state) => {
+        data: topFiveUserCountriesByPopulation.map((country) => {
           return (
-            (namesByFirstLetterInEachState[state][label] * 100) /
-              usUsersNumber || 0
+            (namesByFirstLetterInEachCountry[country][label] * 100) /
+              usersNumber || 0
           );
         }),
-        backgroundColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(
-          Math.random() * 255
-        )}, ${Math.floor(Math.random() * 255)}, 0.5)`,
+        backgroundColor: getRandomColor(),
       };
     });
 
     const userNamesData: ChartData = {
-      labels: [...topFiveUserStatesByPopulation],
-      datasets: [...datasets],
+      labels: topFiveUserCountriesByPopulation,
+      datasets,
     };
 
-    setUserNamesData(userNamesData);
-  }, [usUsers]);
+    setUserNamesInTopCountries(userNamesData);
+  }, [USERS, usersNumber, uniqueUserCountries]);
 
-  return userNamesData;
+  return userNamesInTopCountries;
 };

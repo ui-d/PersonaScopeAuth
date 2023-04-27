@@ -7,6 +7,7 @@ import { useGenderInTopFiveCountriesData } from '@/hooks/useGenderPopulousCountr
 import { useGenderInTopFiveUsStatesData } from '@/hooks/useGenderPopulousUsStatesStats';
 import { useUserAgeStats } from '@/hooks/useUserAgeStats';
 import { useUsersNamesGlobalStats } from '@/hooks/useUsersNamesGlobalStats';
+import { useUsersNamesInPopulousCountries } from '@/hooks/useUsersNamesInPopulousCountries';
 import {
   StackedBarChartOptions,
   useUsersNamesInPopulousUsStatesStats,
@@ -35,6 +36,9 @@ const HomePage = (): JSX.Element => {
   >;
   const usersNamesInPopulousUsStatesStats =
     useUsersNamesInPopulousUsStatesStats() as NonNullable<ChartData<'bar'>>;
+
+  const usersNamesInPopulousCountries =
+    useUsersNamesInPopulousCountries() as NonNullable<ChartData<'bar'>>;
 
   return (
     <>
@@ -91,7 +95,7 @@ const HomePage = (): JSX.Element => {
                     tags={['names', 'global']}
                   />
                   <StackedBarChart
-                    data={usersNamesInPopulousUsStatesStats}
+                    data={usersNamesInPopulousCountries}
                     options={StackedBarChartOptions}
                     title='Names starting with N-Z in top countries'
                     description='Percentage of users from most populous countries, whose last names start with the letters N-Z'
