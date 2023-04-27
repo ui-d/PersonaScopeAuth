@@ -28,24 +28,22 @@ interface HomePageProps {
 const HomePage = ({ users }: HomePageProps): JSX.Element => {
   const session = useSession();
 
-  const genderGlobal = useGenderGlobalStats(users) as NonNullable<
-    ChartData<'pie'>
-  >;
+  const genderGlobal = useGenderGlobalStats(users) as ChartData<'pie'>;
   const genderDataInTopCountries = useGenderInTopFiveCountriesData(
     users
-  ) as NonNullable<ChartData<'bar'>>;
+  ) as ChartData<'bar'>;
   const genderDataInTopUsStates = useGenderInTopFiveUsStatesData(
     users
-  ) as NonNullable<ChartData<'bar'>>;
+  ) as ChartData<'bar'>;
   const ageStructureData = useUserAgeStats(users) as ChartData<'line'>;
-  const usersNamesGlobalStats = useUsersNamesGlobalStats(users) as NonNullable<
-    ChartData<'doughnut'>
-  >;
+  const usersNamesGlobalStats = useUsersNamesGlobalStats(
+    users
+  ) as ChartData<'doughnut'>;
   const usersNamesInPopulousUsStatesStats =
     useUsersNamesInPopulousUsStatesStats(users) as ChartData<'bar'>;
   const usersNamesInPopulousCountries = useUsersNamesInPopulousCountries(
     users
-  ) as NonNullable<ChartData<'bar'>>;
+  ) as ChartData<'bar'>;
 
   return (
     <>

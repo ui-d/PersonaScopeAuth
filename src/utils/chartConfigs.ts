@@ -1,6 +1,4 @@
-import type { ChartOptions } from 'chart.js';
-
-export const StackedBarChartOptions: ChartOptions = {
+export const StackedBarChartOptions = {
   plugins: {
     title: {
       display: true,
