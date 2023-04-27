@@ -6,9 +6,11 @@ import { useGenderGlobalStats } from '@/hooks/useGenderGlobalStats';
 import { useGenderInTopFiveCountriesData } from '@/hooks/useGenderPopulousCountriesStats';
 import { useGenderInTopFiveUsStatesData } from '@/hooks/useGenderPopulousUsStatesStats';
 import { useUserAgeStats } from '@/hooks/useUserAgeStats';
+import { useUsersNamesGlobalStats } from '@/hooks/useUsersNamesGlobalStats';
 
 import { AreaChart } from '@/components/charts/AreaChart';
 import { BarChart } from '@/components/charts/BarChart';
+import { DoughnutChart } from '@/components/charts/DoughnutChart';
 import { PieChart } from '@/components/charts/PieChart';
 import { Container } from '@/components/containers/Container';
 import { Layout } from '@/components/layout/Layout';
@@ -23,6 +25,9 @@ const HomePage = (): JSX.Element => {
   const genderDataInTopUsStates =
     useGenderInTopFiveUsStatesData() as NonNullable<ChartData<'bar'>>;
   const ageStructureData = useUserAgeStats() as NonNullable<ChartData<'line'>>;
+  const usersNamesGlobalStats = useUsersNamesGlobalStats() as NonNullable<
+    ChartData<'doughnut'>
+  >;
 
   return (
     <>
@@ -64,6 +69,12 @@ const HomePage = (): JSX.Element => {
                     description='Percentage of users in each of the following age groups: under 16, 16-25,
 26-45, 46-65, 66-85, over 85'
                     tags={['age', 'global']}
+                  />
+                  <DoughnutChart
+                    data={usersNamesGlobalStats}
+                    title='Names starting with N-Z'
+                    description='Percentage of global users whose last names start with the letters N-Z'
+                    tags={['names', 'global']}
                   />
                 </div>
               </Container>

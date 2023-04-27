@@ -20,7 +20,7 @@ export function Navbar(): JSX.Element {
 
       <div className='navbar-end'>
         <button
-          className='rounded bg-gray-600 px-4 py-2 font-bold text-white hover:bg-blue-700'
+          className='rounded bg-gray-600 px-4 py-2 font-bold text-white hover:bg-gray-700'
           onClick={() => handleSignOut()}
         >
           Sign Out
