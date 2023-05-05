@@ -18,6 +18,7 @@ import { PieChart } from '@/components/charts/PieChart';
 import { StackedBarChart } from '@/components/charts/StackedBarChart';
 import { Container } from '@/components/containers/Container';
 import { Layout } from '@/components/layout/Layout';
+import { Navbar } from '@/components/navigation/navbar';
 import { Seo } from '@/components/Seo';
 
 import { StackedBarChartOptions } from '@/utils/chartConfigs';
@@ -48,7 +49,12 @@ const HomePage = ({ users }: HomePageProps): JSX.Element => {
   return (
     <>
       {!session ? (
-        <></>
+        <>
+          <Navbar />
+          <h1 className='text-center text-3xl font-bold'>
+            Welcome to trial project for Bloomtech
+          </h1>
+        </>
       ) : (
         <Layout>
           <Seo templateTitle='Dashboard' />
