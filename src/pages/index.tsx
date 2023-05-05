@@ -1,6 +1,7 @@
-import { useSession } from '@supabase/auth-helpers-react';
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import axios from 'axios';
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 
 import { useGenderGlobalStats } from '@/hooks/useGenderGlobalStats';
 import { useGenderInTopFiveCountriesData } from '@/hooks/useGenderPopulousCountriesStats';
@@ -26,7 +27,10 @@ interface HomePageProps {
   users: User;
 }
 const HomePage = ({ users }: HomePageProps): JSX.Element => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const session = useSession();
+  const supabase = useSupabaseClient();
 
   const genderGlobal = useGenderGlobalStats(users);
   const genderDataInTopCountries = useGenderInTopFiveCountriesData(users);
@@ -36,6 +40,26 @@ const HomePage = ({ users }: HomePageProps): JSX.Element => {
   const usersNamesInPopulousUsStatesStats =
     useUsersNamesInPopulousUsStatesStats(users);
   const usersNamesInPopulousCountries = useUsersNamesInPopulousCountries(users);
+
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(() => {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, [supabase.auth]);
+
+  if (isLoading) {
+    return (
+      <div className='pt-32 text-center text-3xl font-bold text-black'>
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <>
