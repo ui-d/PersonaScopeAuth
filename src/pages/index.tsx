@@ -27,7 +27,7 @@ interface HomePageProps {
   users: User;
 }
 const HomePage = ({ users }: HomePageProps): JSX.Element => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const session = useSession();
   const supabase = useSupabaseClient();
