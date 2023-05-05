@@ -1,16 +1,22 @@
 import axios from 'axios';
+import { NextApiRequest, NextApiResponse } from 'next';
 import Papa from 'papaparse';
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { format } = req.query;
-  const apiResponse = await axios.get('https://randomuser.me/api/?results=100');
+  const apiResponse = await axios.get<ApiResult>(
+    'https://randomuser.me/api/?results=100'
+  );
 
   // Convert response to JSON
   const data = apiResponse.data.results;
 
   // Convert to CSV if format is CSV
   if (format === 'csv') {
-    let cleanData = data.map((user) => {
+    const cleanData = data.map((user) => {
       return {
         name: `${user.name.first} ${user.name.last}`,
         email: user.email,
