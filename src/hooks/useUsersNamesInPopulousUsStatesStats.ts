@@ -9,8 +9,10 @@ const LABELS = ['M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W'];
 
 export const useUsersNamesInPopulousUsStatesStats = (
   users: User
-): ChartData | null => {
-  const [userNamesData, setUserNamesData] = useState<ChartData | null>(null);
+): ChartData<'bar'> | null => {
+  const [userNamesData, setUserNamesData] = useState<ChartData<'bar'> | null>(
+    null
+  );
 
   const usUsers = useMemo(() => {
     return users.filter(
@@ -57,7 +59,7 @@ export const useUsersNamesInPopulousUsStatesStats = (
       };
     });
 
-    const userNamesData: ChartData = {
+    const userNamesData: ChartData<'bar'> = {
       labels: [...topFiveUserStatesByPopulation],
       datasets: [...datasets],
     };

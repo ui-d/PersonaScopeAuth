@@ -7,8 +7,8 @@ const countUsersInAgeRange = (
   maxAge: number
 ): number => usersAge.filter((age) => age >= minAge && age <= maxAge).length;
 
-export const useUserAgeStats = (users: User): ChartData | null => {
-  const [ageData, setAgeData] = useState<ChartData | null>(null);
+export const useUserAgeStats = (users: User): ChartData<'line'> | null => {
+  const [ageData, setAgeData] = useState<ChartData<'line'> | null>(null);
 
   useEffect(() => {
     const usersNumber = users.length;
@@ -28,7 +28,7 @@ export const useUserAgeStats = (users: User): ChartData | null => {
         (countUsersInAgeRange(usersAge, min, max) / usersNumber) * 100
     );
 
-    const ageStructureData = {
+    const ageStructureData: ChartData<'line'> = {
       labels: ageRanges.map(({ label }) => label),
       datasets: [
         {

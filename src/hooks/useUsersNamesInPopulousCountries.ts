@@ -9,11 +9,11 @@ const LABELS = ['M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W'];
 
 export const useUsersNamesInPopulousCountries = (
   users: User
-): ChartData | null => {
+): ChartData<'bar'> | null => {
   const usersNumber = users.length;
 
   const [userNamesInTopCountries, setUserNamesInTopCountries] =
-    useState<ChartData | null>(null);
+    useState<ChartData<'bar'> | null>(null);
 
   const uniqueUserCountries = useMemo(
     () => [...new Set(users.map((user: Person) => user.location.country))],
@@ -50,7 +50,7 @@ export const useUsersNamesInPopulousCountries = (
       };
     });
 
-    const userNamesData: ChartData = {
+    const userNamesData: ChartData<'bar'> = {
       labels: topFiveUserCountriesByPopulation,
       datasets,
     };

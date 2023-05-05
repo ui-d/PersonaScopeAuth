@@ -5,9 +5,9 @@ import countries from '@/data/countries.json';
 
 export const useGenderInTopFiveCountriesData = (
   users: User
-): ChartData | null => {
+): ChartData<'bar'> | null => {
   const [genderDataInTopCountries, setGenderDataInTopCountries] =
-    useState<ChartData | null>(null);
+    useState<ChartData<'bar'> | null>(null);
 
   useEffect(() => {
     const uniqueUserCountries = [
@@ -52,7 +52,7 @@ export const useGenderInTopFiveCountriesData = (
         return Math.round((maleUsers / totalUsers) * 100);
       });
 
-    const genderInTopFiveCountriesData: ChartData = {
+    const genderInTopFiveCountriesData: ChartData<'bar'> = {
       labels: topFiveUserCountriesByPopulation,
       datasets: [
         {

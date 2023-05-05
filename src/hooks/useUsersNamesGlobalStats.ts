@@ -3,8 +3,11 @@ import { useEffect, useState } from 'react';
 
 import { countNamesByFirstLetter } from '@/utils/helpers';
 
-export const useUsersNamesGlobalStats = (users: User): ChartData | null => {
-  const [userNamesData, setUserNamesData] = useState<ChartData | null>(null);
+export const useUsersNamesGlobalStats = (
+  users: User
+): ChartData<'doughnut'> | null => {
+  const [userNamesData, setUserNamesData] =
+    useState<ChartData<'doughnut'> | null>(null);
 
   useEffect(() => {
     const userLastNames: string[] = users.map((user: Person) => user.name.last);
@@ -43,7 +46,7 @@ export const useUsersNamesGlobalStats = (users: User): ChartData | null => {
       color.replace('0.2', '1')
     );
 
-    const userNamesData: ChartData = {
+    const userNamesData: ChartData<'doughnut'> = {
       labels: [...labels, 'Rest'],
       datasets: [
         {

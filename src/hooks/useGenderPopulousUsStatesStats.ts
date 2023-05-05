@@ -5,9 +5,9 @@ import states from '@/data/states.json';
 
 export const useGenderInTopFiveUsStatesData = (
   users: User
-): ChartData | null => {
+): ChartData<'bar'> | null => {
   const [genderDataInTopFiveStates, setGenderDataInTopFiveStates] =
-    useState<ChartData | null>(null);
+    useState<ChartData<'bar'> | null>(null);
 
   useEffect(() => {
     const usUsers = users.filter(
@@ -43,7 +43,7 @@ export const useGenderInTopFiveUsStatesData = (
       }
     );
 
-    const genderInTopFiveUsStatesData: ChartData = {
+    const genderInTopFiveUsStatesData: ChartData<'bar'> = {
       labels: topFiveUserStatesByPopulation,
       datasets: [
         {

@@ -1,6 +1,5 @@
 import { useSession } from '@supabase/auth-helpers-react';
 import axios from 'axios';
-import { ChartData } from 'chart.js';
 import * as React from 'react';
 
 import { useGenderGlobalStats } from '@/hooks/useGenderGlobalStats';
@@ -29,22 +28,14 @@ interface HomePageProps {
 const HomePage = ({ users }: HomePageProps): JSX.Element => {
   const session = useSession();
 
-  const genderGlobal = useGenderGlobalStats(users) as ChartData<'pie'>;
-  const genderDataInTopCountries = useGenderInTopFiveCountriesData(
-    users
-  ) as ChartData<'bar'>;
-  const genderDataInTopUsStates = useGenderInTopFiveUsStatesData(
-    users
-  ) as ChartData<'bar'>;
-  const ageStructureData = useUserAgeStats(users) as ChartData<'line'>;
-  const usersNamesGlobalStats = useUsersNamesGlobalStats(
-    users
-  ) as ChartData<'doughnut'>;
+  const genderGlobal = useGenderGlobalStats(users);
+  const genderDataInTopCountries = useGenderInTopFiveCountriesData(users);
+  const genderDataInTopUsStates = useGenderInTopFiveUsStatesData(users);
+  const ageStructureData = useUserAgeStats(users);
+  const usersNamesGlobalStats = useUsersNamesGlobalStats(users);
   const usersNamesInPopulousUsStatesStats =
-    useUsersNamesInPopulousUsStatesStats(users) as ChartData<'bar'>;
-  const usersNamesInPopulousCountries = useUsersNamesInPopulousCountries(
-    users
-  ) as ChartData<'bar'>;
+    useUsersNamesInPopulousUsStatesStats(users);
+  const usersNamesInPopulousCountries = useUsersNamesInPopulousCountries(users);
 
   return (
     <>
@@ -64,55 +55,71 @@ const HomePage = ({ users }: HomePageProps): JSX.Element => {
             <>
               <Container>
                 <div className='flex grid w-full grid-flow-row grid-cols-12 gap-4 overflow-y-hidden overflow-x-scroll px-10 pb-10 pt-1 xl:overflow-x-auto xl:px-4'>
-                  <PieChart
-                    data={genderGlobal}
-                    title='Global gender structure'
-                    description='Percentage of users that are female in the total population'
-                    tags={['gender', 'global']}
-                    isNew
-                  />
-                  <BarChart
-                    data={genderDataInTopCountries}
-                    title='Gender in most populous countries'
-                    description='Percentage of each gender in the top 5 most populous countries'
-                    tags={['gender', 'countries', 'top 5']}
-                    isNew
-                  />
-                  <BarChart
-                    data={genderDataInTopUsStates}
-                    title='Gender in most populous states'
-                    description='Percentage of each gender in the top 5 most populous states'
-                    tags={['gender', 'states', 'top 5']}
-                    isNew
-                  />
-                  <AreaChart
-                    data={ageStructureData}
-                    title='Percentage of users in age groups'
-                    description='Percentage of global users in each of the following age groups: under 16, 16-25,
+                  {genderGlobal !== null && (
+                    <PieChart
+                      data={genderGlobal}
+                      title='Global gender structure'
+                      description='Percentage of users that are female in the total population'
+                      tags={['gender', 'global']}
+                      isNew
+                    />
+                  )}
+                  {genderDataInTopCountries !== null && (
+                    <BarChart
+                      data={genderDataInTopCountries}
+                      title='Gender in most populous countries'
+                      description='Percentage of each gender in the top 5 most populous countries'
+                      tags={['gender', 'countries', 'top 5']}
+                      isNew
+                    />
+                  )}
+                  {genderDataInTopUsStates !== null && (
+                    <BarChart
+                      data={genderDataInTopUsStates}
+                      title='Gender in most populous states'
+                      description='Percentage of each gender in the top 5 most populous states'
+                      tags={['gender', 'states', 'top 5']}
+                      isNew
+                    />
+                  )}
+                  {ageStructureData !== null && (
+                    <AreaChart
+                      data={ageStructureData}
+                      title='Percentage of users in age groups'
+                      description='Percentage of global users in each of the following age groups: under 16, 16-25,
 26-45, 46-65, 66-85, over 85'
-                    tags={['age', 'global']}
-                  />
-                  <DoughnutChart
-                    data={usersNamesGlobalStats}
-                    title='Names starting with N-Z'
-                    description='Percentage of global users whose last names start with the letters N-Z'
-                    tags={['names', 'global']}
-                  />
-                  <StackedBarChart
-                    data={usersNamesInPopulousUsStatesStats}
-                    options={StackedBarChartOptions}
-                    title='Names starting with N-Z in most populous states'
-                    description='Percentage of American users from most populous states, whose last names start with the letters N-Z'
-                    tags={['names', 'global', 'top 5', 'states']}
-                  />
-                  <StackedBarChart
-                    data={usersNamesInPopulousCountries}
-                    options={StackedBarChartOptions}
-                    title='Names starting with N-Z in top populous countries'
-                    description='Percentage of users from most populous countries, whose last names start with the letters N-Z'
-                    tags={['names', 'global', 'top 5', 'countries']}
-                    isFullWidth
-                  />
+                      tags={['age', 'global']}
+                    />
+                  )}
+
+                  {usersNamesGlobalStats !== null && (
+                    <DoughnutChart
+                      data={usersNamesGlobalStats}
+                      title='Names starting with N-Z'
+                      description='Percentage of global users whose last names start with the letters N-Z'
+                      tags={['names', 'global']}
+                    />
+                  )}
+
+                  {usersNamesInPopulousUsStatesStats !== null && (
+                    <StackedBarChart
+                      data={usersNamesInPopulousUsStatesStats}
+                      options={StackedBarChartOptions}
+                      title='Names starting with N-Z in most populous states'
+                      description='Percentage of American users from most populous states, whose last names start with the letters N-Z'
+                      tags={['names', 'global', 'top 5', 'states']}
+                    />
+                  )}
+                  {usersNamesInPopulousCountries !== null && (
+                    <StackedBarChart
+                      data={usersNamesInPopulousCountries}
+                      options={StackedBarChartOptions}
+                      title='Names starting with N-Z in top populous countries'
+                      description='Percentage of users from most populous countries, whose last names start with the letters N-Z'
+                      tags={['names', 'global', 'top 5', 'countries']}
+                      isFullWidth
+                    />
+                  )}
                 </div>
               </Container>
             </>

@@ -1,8 +1,10 @@
 import type { ChartData } from 'chart.js';
 import { useEffect, useState } from 'react';
 
-export const useGenderGlobalStats = (users: User): ChartData | null => {
-  const [genderGlobal, setGenderGlobal] = useState<ChartData | null>(null);
+export const useGenderGlobalStats = (users: User): ChartData<'pie'> | null => {
+  const [genderGlobal, setGenderGlobal] = useState<ChartData<'pie'> | null>(
+    null
+  );
 
   useEffect(() => {
     const totalNumberOfUsers = users.length;
@@ -14,7 +16,7 @@ export const useGenderGlobalStats = (users: User): ChartData | null => {
     const femalePercentage = (femaleUsersNumber * 100) / totalNumberOfUsers;
     const malePercantage = 100 - femalePercentage;
 
-    const genderData: ChartData = {
+    const genderData: ChartData<'pie'> = {
       labels: ['Female', 'Male'],
       datasets: [
         {
